@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1540 360" role="img" aria-labelledby="title desc">
+  <title id="title">KerjaNusa Recruitment Platform</title>
+  <desc id="desc">KerjaNusa wordmark with a gold decorative emblem and recruitment platform tagline.</desc>
+  <defs>
+    <linearGradient id="gold-main" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f7dfa1" />
+      <stop offset="45%" stop-color="#efc953" />
+      <stop offset="100%" stop-color="#c88e26" />
+    </linearGradient>
+    <filter id="soft-shadow" x="-8%" y="-12%" width="116%" height="124%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#5d2b42" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <g filter="url(#soft-shadow)">
+    <text
+      x="16"
+      y="202"
+      fill="url(#gold-main)"
+      stroke="#7c5645"
+      stroke-width="1.9"
+      paint-order="stroke fill"
+      letter-spacing="-7"
+      font-family="URW Palladio L"
+      font-size="194"
+      font-weight="400"
+    >Kerja</text>
+    <image href="kerjanusa-mark.png" x="493" y="14" width="90" height="244" preserveAspectRatio="xMidYMid meet" />
+    <text
+      x="576"
+      y="202"
+      fill="url(#gold-main)"
+      stroke="#7c5645"
+      stroke-width="1.9"
+      paint-order="stroke fill"
+      letter-spacing="-7"
+      font-family="URW Palladio L"
+      font-size="194"
+      font-weight="400"
+    >Nusa</text>
+    <text
+      x="637"
+      y="278"
+      fill="#9e6b69"
+      letter-spacing="10"
+      font-family="DejaVu Sans"
+      font-size="34"
+      font-weight="500"
+    >RECRUITMENT PLATFORM</text>
+  </g>
+</svg>

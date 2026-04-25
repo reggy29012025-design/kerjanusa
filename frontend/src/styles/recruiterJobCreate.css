@@ -1,0 +1,1344 @@
+.recruiter-job-create-page {
+  --recruiter-brand-primary: var(--primary, #5b234f);
+  --recruiter-brand-primary-dark: var(--primary-dark, #2d1228);
+  --recruiter-brand-secondary: var(--secondary, #d4aa44);
+  --recruiter-brand-secondary-dark: var(--secondary-dark, #b88730);
+  --recruiter-brand-secondary-rgb: 212, 170, 68;
+  --recruiter-brand-primary-rgb: 91, 35, 79;
+  --job-create-border: rgba(91, 35, 79, 0.12);
+  --job-create-border-strong: rgba(91, 35, 79, 0.18);
+  --job-create-border-accent: rgba(212, 170, 68, 0.32);
+  --job-create-shadow: 0 18px 38px rgba(46, 22, 44, 0.08);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, rgba(212, 170, 68, 0.14), transparent 20%),
+    radial-gradient(circle at left top, rgba(91, 35, 79, 0.08), transparent 26%),
+    linear-gradient(180deg, #fffdf9 0%, #f7eee4 100%);
+  color: var(--gray-900);
+}
+
+.recruiter-job-create-shell {
+  width: min(100% - 2rem, 1060px);
+  padding: 1rem 0 1.8rem;
+}
+
+.recruiter-job-create-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: min(100%, 980px);
+  margin: 0 auto 0.72rem;
+}
+
+.recruiter-job-create-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.recruiter-job-create-back span {
+  font-size: 1.22rem;
+  line-height: 1;
+}
+
+.recruiter-job-create-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: min(100%, 980px);
+  margin: 0 auto 0.85rem;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.recruiter-job-create-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--gray-500);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-step.active {
+  color: var(--primary);
+}
+
+.recruiter-job-create-step.completed {
+  color: var(--primary-dark);
+}
+
+.recruiter-job-create-step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: rgba(91, 35, 79, 0.08);
+  color: var(--gray-600);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-step.active .recruiter-job-create-step-index {
+  background: linear-gradient(
+    135deg,
+    #f4dea4 0%,
+    var(--secondary) 54%,
+    var(--secondary-dark) 100%
+  );
+  color: var(--primary-dark);
+  box-shadow: 0 10px 18px rgba(184, 135, 48, 0.22);
+}
+
+.recruiter-job-create-step.completed .recruiter-job-create-step-index {
+  background: linear-gradient(135deg, #6780f6 0%, #4b62d1 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(75, 98, 209, 0.2);
+}
+
+.recruiter-job-create-step-divider {
+  width: 1rem;
+  height: 1px;
+  background: rgba(91, 35, 79, 0.18);
+}
+
+.recruiter-job-create-note {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: min(100%, 980px);
+  margin: 0 auto 0.9rem;
+  padding: 0.68rem 0.82rem;
+  border: 1px solid rgba(212, 170, 68, 0.46);
+  border-radius: 0.72rem;
+  background: linear-gradient(180deg, #fff8ee 0%, #f8eddc 100%);
+  color: var(--gray-700);
+  box-shadow: 0 12px 22px rgba(46, 22, 44, 0.05);
+}
+
+.recruiter-job-create-note span {
+  font-size: 0.88rem;
+}
+
+.recruiter-job-create-note p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-layout {
+  position: relative;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding-left: 2.35rem;
+}
+
+.recruiter-job-create-card {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.98rem;
+  background: #fffdfa;
+  box-shadow: var(--job-create-shadow);
+  overflow: hidden;
+}
+
+.recruiter-job-create-alert {
+  margin: 1rem 1rem 0;
+  padding: 0.78rem 0.9rem;
+  border-radius: 0.72rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-alert-error {
+  border: 1px solid rgba(224, 83, 83, 0.18);
+  background: rgba(255, 237, 237, 0.92);
+  color: #b42318;
+}
+
+.recruiter-job-create-alert-copy {
+  margin: 0;
+}
+
+.recruiter-job-create-alert-detail-list {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.72rem;
+}
+
+.recruiter-job-create-alert-detail {
+  display: grid;
+  gap: 0.16rem;
+  width: 100%;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid rgba(180, 35, 24, 0.14);
+  border-radius: 0.68rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.recruiter-job-create-alert-detail:hover,
+.recruiter-job-create-alert-detail:focus-visible {
+  border-color: rgba(180, 35, 24, 0.3);
+  box-shadow: 0 10px 18px rgba(180, 35, 24, 0.08);
+  transform: translateY(-1px);
+}
+
+.recruiter-job-create-alert-detail:focus-visible {
+  outline: none;
+}
+
+.recruiter-job-create-alert-detail strong {
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-alert-detail span {
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-alert-detail small {
+  color: rgba(145, 32, 24, 0.82);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-section {
+  display: grid;
+  grid-template-columns: minmax(170px, 190px) minmax(0, 1fr);
+  gap: 1.15rem;
+  padding: 1.25rem 1.35rem;
+}
+
+.recruiter-job-create-section + .recruiter-job-create-section {
+  border-top: 1px solid var(--job-create-border);
+}
+
+.recruiter-job-create-section-copy h2 {
+  margin: 0;
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-section-copy p {
+  margin: 0.28rem 0 0;
+  max-width: 12rem;
+  color: var(--gray-500);
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+.recruiter-job-create-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.recruiter-job-create-field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.recruiter-job-create-field-full {
+  grid-column: 1 / -1;
+}
+
+.recruiter-job-create-field span,
+.recruiter-job-create-field legend {
+  color: var(--gray-700);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-field-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.recruiter-job-create-inline-link {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.recruiter-job-create-field input,
+.recruiter-job-create-field select,
+.recruiter-job-create-field textarea {
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.62rem;
+  background: #ffffff;
+  color: var(--gray-900);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.recruiter-job-create-field textarea {
+  resize: vertical;
+  min-height: 7.75rem;
+  line-height: 1.55;
+}
+
+.recruiter-job-create-address-picker {
+  position: relative;
+}
+
+.recruiter-job-create-address-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.62rem;
+  background: #ffffff;
+  color: var(--gray-900);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.recruiter-job-create-address-picker.is-open .recruiter-job-create-address-trigger,
+.recruiter-job-create-address-trigger:hover {
+  border-color: rgba(91, 35, 79, 0.28);
+  box-shadow: 0 0 0 3px rgba(212, 170, 68, 0.14);
+}
+
+.recruiter-job-create-address-trigger-icon {
+  color: var(--gray-500);
+  font-size: 0.74rem;
+}
+
+.recruiter-job-create-address-menu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 12.8rem;
+  overflow-y: auto;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  box-shadow: 0 22px 36px rgba(46, 22, 44, 0.12);
+}
+
+.recruiter-job-create-address-option {
+  padding: 0.3rem;
+}
+
+.recruiter-job-create-address-option + .recruiter-job-create-address-option {
+  border-top: 1px solid var(--job-create-border);
+}
+
+.recruiter-job-create-address-option.active {
+  background: rgba(212, 170, 68, 0.14);
+}
+
+.recruiter-job-create-address-option-main {
+  display: grid;
+  gap: 0.32rem;
+  width: 100%;
+  padding: 0.58rem 0.65rem 0.3rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.recruiter-job-create-address-option-main strong {
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-address-option-main span {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-address-edit {
+  padding: 0 0.65rem 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-size: 0.73rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.recruiter-job-create-address-summary {
+  margin: 0;
+  color: var(--gray-500);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.recruiter-job-create-field input:focus,
+.recruiter-job-create-field select:focus,
+.recruiter-job-create-field textarea:focus {
+  outline: none;
+  border-color: rgba(91, 35, 79, 0.3);
+  box-shadow: 0 0 0 3px rgba(212, 170, 68, 0.18);
+}
+
+.recruiter-job-create-field input::placeholder,
+.recruiter-job-create-field textarea::placeholder {
+  color: rgba(96, 75, 89, 0.56);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.recruiter-job-create-field small {
+  color: #d92d20;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.recruiter-job-create-field-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+.recruiter-job-create-field-meta small {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.recruiter-job-create-field-meta span {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-salary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.recruiter-job-create-salary-input {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.recruiter-job-create-salary-input small {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.recruiter-job-create-salary-input.has-error small {
+  color: #d92d20;
+  font-weight: 600;
+}
+
+.recruiter-job-create-salary-separator {
+  align-self: center;
+  color: rgba(91, 35, 79, 0.5);
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1;
+  padding-top: 0.15rem;
+}
+
+.recruiter-job-create-radio-group {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.recruiter-job-create-radio-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.recruiter-job-create-radio-options-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.recruiter-job-create-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-height: 2.65rem;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.62rem;
+  background: #ffffff;
+  color: var(--gray-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.recruiter-job-create-radio span {
+  display: block;
+}
+
+.recruiter-job-create-radio input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.recruiter-job-create-radio-note {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--gray-500);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-radio:has(input:checked) {
+  border-color: rgba(212, 170, 68, 0.42);
+  background: linear-gradient(180deg, #fffaf1 0%, #f7ecd6 100%);
+}
+
+.recruiter-job-create-age-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.recruiter-job-create-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--gray-700);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.recruiter-job-create-checkbox input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: var(--primary);
+}
+
+.recruiter-job-create-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.recruiter-job-create-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.45rem 0.72rem;
+  border: 1px solid rgba(91, 35, 79, 0.14);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--gray-700);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.recruiter-job-create-chip:hover {
+  border-color: rgba(91, 35, 79, 0.28);
+  box-shadow: 0 8px 16px rgba(46, 22, 44, 0.06);
+}
+
+.recruiter-job-create-chip.is-selected {
+  border-color: rgba(107, 126, 224, 0.32);
+  background: linear-gradient(180deg, #f5f7ff 0%, #edf1ff 100%);
+  color: #3046af;
+}
+
+.recruiter-job-create-chip-icon {
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.recruiter-job-create-chip-helper {
+  color: var(--gray-500);
+}
+
+.recruiter-job-create-reference-block {
+  display: grid;
+  gap: 0.48rem;
+  margin-top: 0.7rem;
+}
+
+.recruiter-job-create-reference-label {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-reference-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.recruiter-job-create-reference-pill,
+.recruiter-job-create-reference-suggestion {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.44rem 0.72rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-reference-pill {
+  border: 1px solid rgba(91, 35, 79, 0.12);
+  background: rgba(255, 248, 241, 0.9);
+  color: var(--primary-dark);
+}
+
+.recruiter-job-create-reference-suggestion {
+  border: 1px dashed rgba(91, 35, 79, 0.22);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--gray-700);
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.recruiter-job-create-reference-suggestion:hover,
+.recruiter-job-create-reference-suggestion:focus-visible {
+  border-color: rgba(91, 35, 79, 0.34);
+  background: rgba(247, 238, 228, 0.96);
+  transform: translateY(-1px);
+}
+
+.recruiter-job-create-reference-suggestion:focus-visible {
+  outline: none;
+}
+
+.recruiter-job-create-quiz-grid {
+  grid-template-columns: minmax(260px, 310px) minmax(0, 1fr);
+  align-items: start;
+}
+
+.recruiter-job-create-quiz-preview-panel,
+.recruiter-job-create-quiz-panel,
+.recruiter-job-create-quiz-custom-fields {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.recruiter-job-create-quiz-copy span {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-quiz-copy p {
+  margin: 0.28rem 0 0;
+  color: var(--gray-500);
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+.recruiter-job-create-phone-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.recruiter-job-create-phone-shell {
+  width: min(100%, 250px);
+  padding: 0.72rem;
+  border-radius: 2.25rem;
+  background: linear-gradient(180deg, #24151f 0%, #140b12 100%);
+  box-shadow: 0 20px 40px rgba(35, 17, 31, 0.22);
+}
+
+.recruiter-job-create-phone-notch {
+  width: 6rem;
+  height: 0.48rem;
+  margin: 0 auto 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.recruiter-job-create-phone-screen {
+  min-height: 26rem;
+  padding: 1rem 0.95rem;
+  border-radius: 1.7rem;
+  background:
+    radial-gradient(circle at top right, rgba(212, 170, 68, 0.12), transparent 18%),
+    linear-gradient(180deg, #fffdf9 0%, #fff8f0 100%);
+  display: grid;
+  gap: 0.9rem;
+}
+
+.recruiter-job-create-phone-header {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.recruiter-job-create-phone-header strong {
+  color: var(--primary-dark);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-phone-header span {
+  color: var(--gray-500);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.recruiter-job-create-phone-step {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.recruiter-job-create-phone-step span {
+  color: var(--gray-500);
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-phone-step-bar {
+  height: 0.3rem;
+  border-radius: 999px;
+  background: rgba(91, 35, 79, 0.08);
+  overflow: hidden;
+}
+
+.recruiter-job-create-phone-step-bar span {
+  display: block;
+  width: 32%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #5b234f 0%, #7d3f6d 100%);
+}
+
+.recruiter-job-create-phone-question {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.recruiter-job-create-phone-question p {
+  margin: 0;
+  color: var(--gray-900);
+  font-size: 0.77rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.recruiter-job-create-phone-question span {
+  color: var(--gray-500);
+  font-size: 0.67rem;
+}
+
+.recruiter-job-create-phone-options {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recruiter-job-create-phone-option {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.45rem;
+  padding: 0.68rem 0.78rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.8rem;
+  background: #ffffff;
+  color: var(--gray-700);
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+
+.recruiter-job-create-phone-option.is-highlighted {
+  border-color: rgba(107, 126, 224, 0.32);
+  background: linear-gradient(180deg, #f5f7ff 0%, #edf1ff 100%);
+  color: #3046af;
+}
+
+.recruiter-job-create-phone-option-dot {
+  width: 0.86rem;
+  height: 0.86rem;
+  border: 1.5px solid rgba(91, 35, 79, 0.2);
+  border-radius: 999px;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.recruiter-job-create-phone-option.is-highlighted .recruiter-job-create-phone-option-dot {
+  border-color: rgba(107, 126, 224, 0.5);
+  box-shadow: inset 0 0 0 3px #ffffff;
+  background: #6b7ee0;
+}
+
+.recruiter-job-create-quiz-chip-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.recruiter-job-create-quiz-chip {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.recruiter-job-create-quiz-chip-custom {
+  border-style: dashed;
+  background: linear-gradient(180deg, #fff7f1 0%, #fff1e1 100%);
+  color: #b54708;
+  cursor: default;
+}
+
+.recruiter-job-create-quiz-selected-list {
+  display: grid;
+  gap: 0.58rem;
+  margin-top: 0.8rem;
+}
+
+.recruiter-job-create-quiz-selected-item {
+  display: grid;
+  gap: 0.18rem;
+  width: 100%;
+  padding: 0.78rem 0.86rem;
+  border: 1px solid rgba(91, 35, 79, 0.12);
+  border-radius: 0.82rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.recruiter-job-create-quiz-selected-item strong {
+  color: var(--primary-dark);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-quiz-selected-item span {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.recruiter-job-create-quiz-selected-item:hover,
+.recruiter-job-create-quiz-selected-item:focus-visible {
+  border-color: rgba(91, 35, 79, 0.28);
+  box-shadow: 0 10px 20px rgba(46, 22, 44, 0.08);
+  transform: translateY(-1px);
+}
+
+.recruiter-job-create-quiz-selected-item.is-active {
+  border-color: rgba(107, 126, 224, 0.34);
+  background: linear-gradient(180deg, #f5f7ff 0%, #edf1ff 100%);
+}
+
+.recruiter-job-create-quiz-selected-item:focus-visible {
+  outline: none;
+}
+
+.recruiter-job-create-quiz-detail-card {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.9rem;
+  background: linear-gradient(180deg, #fffdfb 0%, #fffaf4 100%);
+}
+
+.recruiter-job-create-quiz-detail-card h3 {
+  margin: 0;
+  color: var(--primary-dark);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-quiz-detail-card p {
+  margin: 0;
+  color: var(--gray-500);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.recruiter-job-create-quiz-detail-block {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.recruiter-job-create-quiz-detail-block span {
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-quiz-detail-block strong {
+  color: var(--gray-900);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.recruiter-job-create-quiz-answer-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.recruiter-job-create-quiz-answer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.6rem;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: var(--gray-700);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.recruiter-job-create-quiz-answer input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: #6b7ee0;
+}
+
+.recruiter-job-create-quiz-answer.is-recommended {
+  border-color: rgba(107, 126, 224, 0.32);
+  background: linear-gradient(180deg, #f5f7ff 0%, #edf1ff 100%);
+  color: #3046af;
+}
+
+.recruiter-job-create-summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.recruiter-job-create-summary-card {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem;
+  border: 1px solid var(--job-create-border);
+  border-radius: 0.8rem;
+  background: linear-gradient(180deg, #fffdfb 0%, #fff7ef 100%);
+}
+
+.recruiter-job-create-summary-card strong {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-summary-card span {
+  color: var(--gray-600);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.recruiter-job-create-summary-card-full {
+  grid-column: 1 / -1;
+}
+
+.recruiter-job-create-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  padding: 1rem 1.35rem 1.2rem;
+  border-top: 1px solid var(--job-create-border);
+}
+
+.recruiter-job-create-actions-split {
+  justify-content: space-between;
+}
+
+.recruiter-job-create-secondary {
+  padding: 0.74rem 0.96rem;
+  border: 1px solid var(--job-create-border-accent);
+  border-radius: 0.72rem;
+  background: linear-gradient(180deg, #fffaf1 0%, #f7ecd6 100%);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.recruiter-job-create-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(46, 22, 44, 0.08);
+}
+
+.recruiter-job-create-page .recruiter-create-job-button {
+  padding: 0.74rem 1rem;
+  border: 1px solid rgba(var(--recruiter-brand-primary-rgb), 0.24);
+  border-radius: 0.72rem;
+  font-size: 0.82rem;
+  color: #fff8ef;
+  background: linear-gradient(
+    135deg,
+    var(--recruiter-brand-primary) 0%,
+    #713062 54%,
+    var(--recruiter-brand-primary-dark) 100%
+  );
+  box-shadow: 0 12px 24px rgba(91, 35, 79, 0.18);
+}
+
+.recruiter-job-create-page .recruiter-create-job-button:hover:not(:disabled) {
+  box-shadow: 0 16px 28px rgba(91, 35, 79, 0.22);
+}
+
+.recruiter-job-create-page .recruiter-create-job-button:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+  border-color: rgba(91, 35, 79, 0.12);
+  background: linear-gradient(180deg, #eadfdb 0%, #d9cbc8 100%);
+  color: rgba(45, 18, 40, 0.58);
+  box-shadow: none;
+}
+
+.recruiter-job-create-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(35, 17, 31, 0.38);
+  backdrop-filter: blur(3px);
+}
+
+.recruiter-job-create-modal {
+  width: min(100%, 34rem);
+  max-height: min(92vh, 48rem);
+  overflow-y: auto;
+  border-radius: 0.92rem;
+  border: 1px solid var(--job-create-border);
+  background: #fffdfa;
+  box-shadow: 0 26px 56px rgba(35, 17, 31, 0.18);
+}
+
+.recruiter-job-create-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.92rem 0.95rem 0.65rem;
+}
+
+.recruiter-job-create-modal-header h2 {
+  margin: 0;
+  color: var(--primary-dark);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.recruiter-job-create-modal-close {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gray-600);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.recruiter-job-create-modal-body {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0 0.95rem 0.95rem;
+}
+
+.recruiter-job-create-modal-radio-group {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.recruiter-job-create-modal-radio-options {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.recruiter-job-create-modal-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--gray-700);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.recruiter-job-create-modal-radio input {
+  accent-color: var(--primary);
+}
+
+.recruiter-job-create-modal-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.3rem;
+}
+
+.recruiter-job-create-modal-submit {
+  padding: 0.74rem 0.96rem;
+  border: 1px solid rgba(91, 35, 79, 0.22);
+  border-radius: 0.72rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    #713062 56%,
+    var(--primary-dark) 100%
+  );
+  color: #fff8ef;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.recruiter-job-create-modal-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 24px rgba(91, 35, 79, 0.18);
+}
+
+.recruiter-job-create-page .recruiter-service-rail {
+  top: 10.2rem;
+}
+
+@media (max-width: 1080px) {
+  .recruiter-job-create-layout {
+    padding-left: 0;
+  }
+
+  .recruiter-job-create-page .recruiter-service-rail {
+    display: none;
+  }
+
+  .recruiter-job-create-section {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .recruiter-job-create-section-copy p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .recruiter-job-create-shell {
+    padding-top: 1rem;
+  }
+
+  .recruiter-job-create-back {
+    font-size: 0.95rem;
+  }
+
+  .recruiter-job-create-stepper {
+    gap: 0.55rem;
+  }
+
+  .recruiter-job-create-step {
+    font-size: 0.74rem;
+  }
+
+  .recruiter-job-create-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-radio-options {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-radio-options-three {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-radio-note {
+    font-size: 0.7rem;
+  }
+
+  .recruiter-job-create-field-inline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .recruiter-job-create-field-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recruiter-job-create-salary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-age-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-quiz-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-job-create-salary-separator {
+    display: none;
+  }
+
+  .recruiter-job-create-actions {
+    justify-content: stretch;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .recruiter-job-create-actions-split {
+    justify-content: stretch;
+  }
+
+  .recruiter-job-create-secondary,
+  .recruiter-job-create-actions .recruiter-create-job-button {
+    width: 100%;
+  }
+
+  .recruiter-job-create-modal-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .recruiter-job-create-shell {
+    width: min(100% - 1rem, 1060px);
+    padding-bottom: 1.35rem;
+  }
+
+  .recruiter-job-create-header {
+    margin-bottom: 0.8rem;
+  }
+
+  .recruiter-job-create-note {
+    align-items: flex-start;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .recruiter-job-create-note p {
+    font-size: 0.78rem;
+  }
+
+  .recruiter-job-create-alert {
+    margin: 1rem 1rem 0;
+  }
+
+  .recruiter-job-create-section {
+    padding: 1rem 0.9rem;
+  }
+
+  .recruiter-job-create-section-copy h2 {
+    font-size: 0.79rem;
+  }
+
+  .recruiter-job-create-section-copy p {
+    font-size: 0.72rem;
+  }
+
+  .recruiter-job-create-field span,
+  .recruiter-job-create-field legend {
+    font-size: 0.74rem;
+  }
+
+  .recruiter-job-create-field input,
+  .recruiter-job-create-field select,
+  .recruiter-job-create-field textarea,
+  .recruiter-job-create-radio,
+  .recruiter-job-create-address-trigger {
+    padding: 0.72rem 0.78rem;
+    font-size: 0.76rem;
+  }
+
+  .recruiter-job-create-actions {
+    padding: 0.9rem;
+  }
+
+  .recruiter-job-create-address-option-main {
+    padding: 0.58rem 0.62rem 0.25rem;
+  }
+
+  .recruiter-job-create-modal {
+    width: min(100%, 30rem);
+  }
+}

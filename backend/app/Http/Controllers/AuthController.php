@@ -1,0 +1,141 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
+
+class AuthController extends Controller
+{
+    public function __construct(private AuthService $authService)
+    {
+    }
+
+    /**
+     * Register a new user
+     */
+    public function register(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => ['required', Password::min(8)->letters()->numbers()],
+            'password_confirmation' => 'required|same:password',
+            'role' => 'required|in:candidate,recruiter',
+            'phone' => 'nullable|string',
+        ]);
+
+        $user = $this->authService->register($validated);
+        $token = $this->authService->createToken($user);
+
+        return response()->json([
+            'message' => 'User registered successfully',
+            'user' => $user,
+            'token' => $token,
+        ], 201);
+    }
+
+    /**
+     * Login user
+     */
+    public function login(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        $user = $this->authService->login($validated['email'], $validated['password']);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Invalid credentials',
+            ], 401);
+        }
+
+        $token = $this->authService->createToken($user);
+
+        return response()->json([
+            'message' => 'Login successful',
+            'user' => $user,
+            'token' => $token,
+        ]);
+    }
+
+    /**
+     * Logout user
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logout successful',
+        ]);
+    }
+
+    /**
+     * Get current user
+     */
+    public function me(Request $request): JsonResponse
+    {
+        return response()->json([
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Update user profile
+     */
+    public function updateProfile(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'phone' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $success = $this->authService->updateProfile($request->user()->id, $validated);
+
+        if (!$success) {
+            return response()->json([
+                'message' => 'Failed to update profile',
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Change password
+     */
+    public function changePassword(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'old_password' => 'required|string',
+            'new_password' => ['required', Password::min(8)->letters()->numbers()],
+            'new_password_confirmation' => 'required|same:new_password',
+        ]);
+
+        $success = $this->authService->changePassword(
+            $request->user()->id,
+            $validated['old_password'],
+            $validated['new_password']
+        );
+
+        if (!$success) {
+            return response()->json([
+                'message' => 'Failed to change password',
+            ], 400);
+        }
+
+        return response()->json([
+            'message' => 'Password changed successfully',
+        ]);
+    }
+}
