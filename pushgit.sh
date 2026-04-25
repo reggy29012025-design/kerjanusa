@@ -100,7 +100,7 @@ if [[ "$REMOTE_MODE" == "https" && -n "${GITHUB_TOKEN:-}" ]]; then
     exit 1
   fi
 elif [[ "$REMOTE_MODE" == "ssh" && -n "$SSH_KEY_PATH" ]]; then
-  export GIT_SSH_COMMAND="ssh -i $SSH_KEY_PATH -o IdentitiesOnly=yes"
+  export GIT_SSH_COMMAND="ssh -F /dev/null -i $SSH_KEY_PATH -o IdentitiesOnly=yes"
   echo "Menggunakan SSH key: $SSH_KEY_PATH"
 fi
 
