@@ -187,14 +187,20 @@ const CandidateDashboardPage = () => {
   const [profile, setProfile] = useState(() => readCandidateProfile(user));
   const [saveMessage, setSaveMessage] = useState('');
   const [activeOverviewCard, setActiveOverviewCard] = useState(null);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
     setActiveSection(resolveCandidateSectionFromHash(location.hash));
+    setIsMobileNavOpen(false);
   }, [location.hash]);
 
   useEffect(() => {
     setProfile(readCandidateProfile(user));
   }, [user]);
+
+  useEffect(() => {
+    setIsMobileNavOpen(false);
+  }, [location.pathname]);
 
   const completionSummary = useMemo(() => {
     const checklist = [
@@ -300,7 +306,13 @@ const CandidateDashboardPage = () => {
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
+    setIsMobileNavOpen(false);
     navigate(getCandidateSectionRoute(section));
+  };
+
+  const handleLogout = () => {
+    setIsMobileNavOpen(false);
+    logout();
   };
 
   const filledSkills = profile.skills.filter((item) => item.trim());
@@ -345,7 +357,11 @@ const CandidateDashboardPage = () => {
 
   return (
     <div className="workspace-page workspace-page-candidate">
-      <header className="workspace-topbar">
+      <header
+        className={`workspace-topbar workspace-topbar-candidate${
+          isMobileNavOpen ? ' workspace-topbar-nav-open' : ''
+        }`}
+      >
         <div className="workspace-shell workspace-topbar-shell">
           <Link
             to={APP_ROUTES.landing}
@@ -355,7 +371,11 @@ const CandidateDashboardPage = () => {
             <img src="/kerjanusa-logo-cutout.png" alt="KerjaNusa Recruitment Platform" />
           </Link>
 
-          <nav className="workspace-nav" aria-label="Navigasi pelamar">
+          <nav
+            id="candidate-mobile-nav"
+            className={`workspace-nav${isMobileNavOpen ? ' is-open' : ''}`}
+            aria-label="Navigasi pelamar"
+          >
             {CANDIDATE_SECTION_OPTIONS.map((section) => (
               <button
                 key={section.value}
@@ -368,14 +388,44 @@ const CandidateDashboardPage = () => {
                 {section.label}
               </button>
             ))}
+
+            <div className="workspace-mobile-menu-footer">
+              <div className="workspace-user-chip workspace-mobile-menu-user">
+                <strong>{profile.fullName || user.name}</strong>
+                <span>Pelamar</span>
+              </div>
+              <button
+                type="button"
+                className="btn btn-secondary workspace-logout workspace-mobile-menu-logout"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </div>
           </nav>
 
           <div className="workspace-actions">
+            <button
+              type="button"
+              className="workspace-mobile-nav-toggle"
+              aria-expanded={isMobileNavOpen}
+              aria-controls="candidate-mobile-nav"
+              aria-label={isMobileNavOpen ? 'Tutup menu pelamar' : 'Buka menu pelamar'}
+              onClick={() => setIsMobileNavOpen((currentValue) => !currentValue)}
+            >
+              <span className="workspace-mobile-nav-toggle-line" />
+              <span className="workspace-mobile-nav-toggle-line" />
+              <span className="workspace-mobile-nav-toggle-line" />
+            </button>
             <div className="workspace-user-chip">
               <strong>{profile.fullName || user.name}</strong>
               <span>Pelamar</span>
             </div>
-            <button type="button" className="btn btn-secondary workspace-logout" onClick={logout}>
+            <button
+              type="button"
+              className="btn btn-secondary workspace-logout"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </div>
@@ -383,24 +433,7 @@ const CandidateDashboardPage = () => {
       </header>
 
       <main className="workspace-shell workspace-main">
-        <section className="workspace-overview-grid" data-reveal>
-          <article className="workspace-hero-card">
-            <span className="workspace-kicker">Login Pelamar</span>
-            <h1>Info Data Diri & Preferensi Kerja</h1>
-            <p>
-              Lengkapi profil pelamar, unggah dokumen terbaru, lalu gunakan satu tempat ini untuk
-              menyiapkan proses cari kerja dan komunikasi dengan recruiter.
-            </p>
-            <div className="workspace-action-row">
-              <button type="button" className="btn btn-primary" onClick={handleSaveProfile}>
-                Simpan Data Pelamar
-              </button>
-              <Link to="/jobs" className="btn btn-outline">
-                Lihat Lowongan Publik
-              </Link>
-            </div>
-          </article>
-
+        <section className="workspace-candidate-kpi-slot" data-reveal>
           <div className="workspace-kpi-grid">
             {overviewCards.map((card) => (
               <button
