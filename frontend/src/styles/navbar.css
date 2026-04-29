@@ -69,6 +69,53 @@
   color: var(--primary);
 }
 
+.navbar-contact {
+  position: relative;
+}
+
+.navbar-contact-trigger {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar-contact-panel {
+  position: absolute;
+  top: calc(100% + 0.8rem);
+  left: 50%;
+  display: none;
+  min-width: 18rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(183, 133, 45, 0.16);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fffaf4, #f7ede4);
+  box-shadow: 0 18px 36px rgba(46, 22, 44, 0.12);
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.navbar-contact-panel.is-open {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.navbar-contact-panel strong {
+  color: var(--primary-dark);
+  font-size: 0.92rem;
+}
+
+.navbar-contact-panel a {
+  color: var(--gray-600);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.navbar-contact-panel a:hover {
+  color: var(--primary);
+}
+
 .navbar-link-muted {
   color: var(--gray-500);
   font-weight: 500;
@@ -113,15 +160,6 @@
   gap: 0.8rem;
   align-items: center;
   min-width: fit-content;
-}
-
-.user-name {
-  color: var(--gray-700);
-  font-weight: 700;
-  max-width: 220px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 @media (max-width: 1180px) {
@@ -210,6 +248,22 @@
     border: 1px solid rgba(183, 133, 45, 0.1);
   }
 
+  .navbar-contact {
+    width: 100%;
+  }
+
+  .navbar-contact-trigger {
+    justify-content: flex-start;
+  }
+
+  .navbar-contact-panel {
+    position: static;
+    min-width: 0;
+    margin-top: 0.35rem;
+    transform: none;
+    box-shadow: none;
+  }
+
   .navbar-link.active {
     background: rgba(31, 99, 219, 0.08);
   }
@@ -235,14 +289,6 @@
     max-width: none;
     min-height: 3rem;
   }
-
-  .user-name {
-    grid-column: 1 / -1;
-    max-width: 100%;
-    white-space: normal;
-    padding: 0.1rem 0.2rem;
-  }
-
   .navbar-backdrop {
     display: block;
     position: fixed;
@@ -335,6 +381,7 @@
   .navbar-panel {
     top: calc(100% + 0.55rem);
   }
+
 }
 
 /* KerjaNusa Theme */
@@ -405,10 +452,6 @@
 
 .navbar-toggle-line {
   background: linear-gradient(90deg, var(--primary), #7c476d);
-}
-
-.user-name {
-  color: var(--primary-dark);
 }
 
 @media (min-width: 901px) {

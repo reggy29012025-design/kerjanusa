@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import RecruiterTopbar from '../components/RecruiterTopbar.jsx';
 import useAuth from '../hooks/useAuth';
 import useJobs from '../hooks/useJobs';
+import { APP_ROUTES } from '../utils/routeHelpers.js';
 import { formatExperienceLevel } from '../utils/jobFormatters.js';
 import '../styles/recruiterDashboard.css';
 
@@ -383,12 +384,28 @@ const getStoredRecruiterDashboardValue = (key, fallbackValue) => {
   return storedState[key] ?? fallbackValue;
 };
 
-const getInitialRecruiterSection = () => {
-  const storedSection = getStoredRecruiterDashboardValue('activeSection', 'jobs');
-  return RECRUITER_SECTION_OPTIONS.some((section) => section.value === storedSection)
-    ? storedSection
-    : 'jobs';
+const resolveRecruiterSectionFromHash = (hash) => {
+  const normalizedHash = hash.replace(/^#/, '');
+
+  if (RECRUITER_SECTION_OPTIONS.some((section) => section.value === normalizedHash)) {
+    return normalizedHash;
+  }
+
+  return 'jobs';
 };
+
+const getInitialRecruiterSection = () => {
+  if (typeof window === 'undefined') {
+    return 'jobs';
+  }
+
+  return resolveRecruiterSectionFromHash(window.location.hash);
+};
+
+const getRecruiterSectionRoute = (section) =>
+  section === 'jobs'
+    ? APP_ROUTES.recruiterDashboard
+    : `${APP_ROUTES.recruiterDashboard}#${section}`;
 
 const getInitialCandidateStage = () => {
   const storedStage = getStoredRecruiterDashboardValue('activeCandidateStage', 'applied');
@@ -425,6 +442,7 @@ const getCandidatePipelineCounts = () => ({
 });
 
 const RecruiterDashboardPage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { jobs, pagination, isLoading, error, getMyJobs, deleteJob } = useJobs();
@@ -457,6 +475,20 @@ const RecruiterDashboardPage = () => {
       getMyJobs(1, 12);
     }
   }, [getMyJobs, user]);
+
+  useEffect(() => {
+    const nextSection = resolveRecruiterSectionFromHash(location.hash);
+
+    if (activeSection === nextSection) {
+      return;
+    }
+
+    setActiveSection(nextSection);
+    setSelectedCandidateDetailId(null);
+    setActiveCandidateDetailTab('profile');
+    setCopiedCandidatePhoneId(null);
+    setJobPendingDelete(null);
+  }, [activeSection, location.hash]);
 
   const dashboardJobs = useMemo(
     () =>
@@ -576,7 +608,6 @@ const RecruiterDashboardPage = () => {
     window.localStorage.setItem(
       RECRUITER_DASHBOARD_STORAGE_KEY,
       JSON.stringify({
-        activeSection,
         searchQuery,
         activeStatus,
         candidateSearchQuery,
@@ -587,7 +618,6 @@ const RecruiterDashboardPage = () => {
     );
   }, [
     activeCandidateStage,
-    activeSection,
     activeStatus,
     candidateSearchQuery,
     isCandidateNoticeVisible,
@@ -672,6 +702,7 @@ const RecruiterDashboardPage = () => {
     setActiveCandidateDetailTab('profile');
     setCopiedCandidatePhoneId(null);
     setJobPendingDelete(null);
+    navigate(getRecruiterSectionRoute(section));
   };
 
   const handleCandidateJobChange = (event) => {
@@ -739,14 +770,6 @@ const RecruiterDashboardPage = () => {
     }
   };
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (user.role !== 'recruiter') {
-    return <Navigate to="/" replace />;
-  }
-
   return (
     <div className="recruiter-dashboard-page">
       <RecruiterTopbar
@@ -763,13 +786,12 @@ const RecruiterDashboardPage = () => {
         {activeSection === 'jobs' ? (
           <>
             <div className="recruiter-page-actions">
-              <button
-                type="button"
+              <Link
+                to="/recruiter/jobs/create"
                 className="recruiter-create-job-button"
-                onClick={() => navigate('/recruiter/jobs/create')}
               >
                 + Pasang Loker
-              </button>
+              </Link>
             </div>
 
             <section className="recruiter-content-surface">

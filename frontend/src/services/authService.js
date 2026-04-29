@@ -23,6 +23,15 @@ const defaultMockUsers = [
     company_name: '',
     password: DEFAULT_DEMO_PASSWORD,
   },
+  {
+    id: 3,
+    name: 'Admin KerjaNusa',
+    email: 'admin@kerjanusa.com',
+    phone: '081122334455',
+    role: 'internal',
+    company_name: 'KerjaNusa Internal',
+    password: DEFAULT_DEMO_PASSWORD,
+  },
 ];
 
 const stripPassword = ({ password, ...user }) => user;
@@ -34,7 +43,9 @@ const syncDemoUserPassword = (user) => {
 
   const normalizedEmail = user.email?.trim().toLowerCase();
   const isDemoUser =
-    normalizedEmail === 'recruiter@example.com' || normalizedEmail === 'candidate@example.com';
+    normalizedEmail === 'recruiter@example.com' ||
+    normalizedEmail === 'candidate@example.com' ||
+    normalizedEmail === 'admin@kerjanusa.com';
 
   if (!isDemoUser || user.password === DEFAULT_DEMO_PASSWORD) {
     return user;
@@ -54,13 +65,22 @@ const getMockUsers = () => {
       const parsedUsers = JSON.parse(storedUsers);
       if (Array.isArray(parsedUsers)) {
         const normalizedUsers = parsedUsers.map(syncDemoUserPassword);
-        const shouldPersistUpgrade = normalizedUsers.some((user, index) => user !== parsedUsers[index]);
+        const existingEmails = new Set(
+          normalizedUsers.map((user) => user?.email?.trim().toLowerCase()).filter(Boolean)
+        );
+        const missingDefaultUsers = defaultMockUsers.filter(
+          (user) => !existingEmails.has(user.email.toLowerCase())
+        );
+        const mergedUsers = [...normalizedUsers, ...missingDefaultUsers];
+        const shouldPersistUpgrade =
+          mergedUsers.length !== parsedUsers.length ||
+          normalizedUsers.some((user, index) => user !== parsedUsers[index]);
 
         if (shouldPersistUpgrade) {
-          saveMockUsers(normalizedUsers);
+          saveMockUsers(mergedUsers);
         }
 
-        return normalizedUsers;
+        return mergedUsers;
       }
     } catch (error) {
       // Fall back to the seeded mock users.

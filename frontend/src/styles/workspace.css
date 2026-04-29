@@ -1,0 +1,659 @@
+.workspace-page {
+  min-height: 100vh;
+  padding-bottom: 4rem;
+  background:
+    radial-gradient(circle at top left, rgba(212, 170, 68, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(91, 35, 79, 0.12), transparent 28%),
+    linear-gradient(180deg, #fffaf4 0%, #f5ebdf 100%);
+}
+
+.workspace-shell {
+  width: min(100% - 2rem, 1320px);
+  margin: 0 auto;
+}
+
+.workspace-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 1rem 0;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255, 250, 244, 0.82);
+  border-bottom: 1px solid rgba(91, 35, 79, 0.08);
+}
+
+.workspace-topbar-shell {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.1rem;
+  align-items: center;
+}
+
+.workspace-brand img {
+  width: clamp(10.5rem, 16vw, 13rem);
+  height: auto;
+}
+
+.workspace-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.workspace-nav-wide {
+  justify-content: flex-start;
+}
+
+.workspace-nav-button {
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(91, 35, 79, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 250, 244, 0.92);
+  color: var(--primary-dark);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.workspace-nav-button.active,
+.workspace-nav-button:hover {
+  background: linear-gradient(135deg, #f4dea4 0%, var(--secondary) 55%, #b88730 100%);
+  border-color: rgba(184, 135, 48, 0.26);
+  color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.workspace-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.workspace-user-chip {
+  padding: 0.8rem 1rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 250, 244, 0.92);
+  border: 1px solid rgba(91, 35, 79, 0.12);
+  min-width: 0;
+}
+
+.workspace-user-chip strong,
+.workspace-user-chip span {
+  display: block;
+}
+
+.workspace-user-chip strong {
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+}
+
+.workspace-user-chip span {
+  margin-top: 0.18rem;
+  color: var(--gray-500);
+  font-size: 0.8rem;
+}
+
+.workspace-main {
+  padding-top: 2rem;
+}
+
+.workspace-overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.workspace-hero-card,
+.workspace-panel,
+.workspace-kpi-card,
+.workspace-subcard,
+.workspace-file-card,
+.workspace-message-card {
+  border-radius: 1.7rem;
+  border: 1px solid rgba(91, 35, 79, 0.1);
+  background: rgba(255, 251, 246, 0.94);
+  box-shadow: 0 18px 40px rgba(46, 22, 44, 0.08);
+}
+
+.workspace-hero-card,
+.workspace-panel,
+.workspace-file-card {
+  padding: 1.5rem;
+}
+
+.workspace-kicker,
+.workspace-section-label {
+  display: inline-block;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.workspace-hero-card h1,
+.workspace-panel h2 {
+  margin-top: 0.7rem;
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+}
+
+.workspace-hero-card h1 {
+  font-size: clamp(2.4rem, 3vw, 3.5rem);
+  max-width: 12ch;
+}
+
+.workspace-hero-card p,
+.workspace-panel-heading p,
+.workspace-subcard p,
+.workspace-progress-card p,
+.workspace-file-card p,
+.workspace-message-card p {
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.workspace-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.4rem;
+}
+
+.workspace-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.workspace-kpi-card {
+  padding: 1.2rem 1.15rem;
+}
+
+.workspace-kpi-card-button {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.workspace-kpi-card-button:hover,
+.workspace-kpi-card-button.is-active {
+  border-color: rgba(184, 135, 48, 0.24);
+  box-shadow: 0 22px 38px rgba(46, 22, 44, 0.12);
+  transform: translateY(-2px);
+}
+
+.workspace-kpi-card-button:focus-visible {
+  outline: 3px solid rgba(212, 170, 68, 0.28);
+  outline-offset: 2px;
+}
+
+.workspace-kpi-card span,
+.workspace-kpi-card strong,
+.workspace-kpi-card small {
+  display: block;
+}
+
+.workspace-kpi-card span {
+  color: var(--gray-500);
+  font-size: 0.84rem;
+}
+
+.workspace-kpi-card strong {
+  margin-top: 0.55rem;
+  color: var(--primary-dark);
+  font-size: 1.75rem;
+  line-height: 1.05;
+}
+
+.workspace-kpi-card small {
+  margin-top: 0.48rem;
+  color: var(--gray-500);
+  line-height: 1.55;
+}
+
+.workspace-kpi-detail-wrap {
+  margin-top: 1rem;
+}
+
+.workspace-kpi-detail-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.workspace-feedback {
+  margin-top: 1.1rem;
+}
+
+.workspace-section-stack {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: 1.15rem;
+}
+
+.workspace-two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 1.15rem;
+}
+
+.workspace-panel-heading {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.workspace-panel-heading h2 {
+  font-size: clamp(1.6rem, 1.6vw, 2.1rem);
+}
+
+.workspace-form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.workspace-form-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workspace-field {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.workspace-field span {
+  color: var(--gray-700);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.workspace-field input,
+.workspace-field select,
+.workspace-field textarea {
+  width: 100%;
+  padding: 0.82rem 0.95rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--gray-900);
+}
+
+.workspace-field textarea {
+  resize: vertical;
+}
+
+.workspace-field-span-two {
+  grid-column: span 2;
+}
+
+.workspace-inline-note {
+  margin-top: 1rem;
+  color: var(--gray-600);
+}
+
+.workspace-card-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.workspace-card-list-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.workspace-subcard {
+  padding: 1.15rem;
+}
+
+.workspace-subcard-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+}
+
+.workspace-subcard-heading strong {
+  color: var(--primary-dark);
+}
+
+.workspace-subcard-heading span {
+  color: var(--gray-500);
+  font-size: 0.82rem;
+}
+
+.workspace-list-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.workspace-file-grid,
+.workspace-message-list,
+.workspace-progress-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.workspace-file-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.1rem;
+}
+
+.workspace-file-grid-detail {
+  margin-top: 0;
+}
+
+.workspace-file-card strong {
+  color: var(--primary-dark);
+}
+
+.workspace-file-card ul {
+  margin-top: 0.8rem;
+  padding-left: 1.2rem;
+  color: var(--gray-600);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.workspace-chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.workspace-chip-wrap-secondary {
+  margin-top: 0.85rem;
+}
+
+.workspace-chip {
+  padding: 0.6rem 0.88rem;
+  border-radius: 999px;
+  background: rgba(91, 35, 79, 0.08);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.workspace-chip-secondary {
+  background: rgba(212, 170, 68, 0.18);
+}
+
+.workspace-chip-muted {
+  background: rgba(91, 35, 79, 0.04);
+  color: var(--gray-500);
+}
+
+.workspace-checklist {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.workspace-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: rgba(91, 35, 79, 0.04);
+  color: var(--gray-600);
+}
+
+.workspace-checklist-item.is-done {
+  background: rgba(47, 138, 96, 0.1);
+  color: #21533d;
+}
+
+.workspace-progress-card {
+  padding: 1rem 1.05rem;
+  border-radius: 1.2rem;
+  background: rgba(91, 35, 79, 0.04);
+}
+
+.workspace-progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+  color: var(--primary-dark);
+}
+
+.workspace-progress-track {
+  height: 0.7rem;
+  border-radius: 999px;
+  background: rgba(91, 35, 79, 0.08);
+  overflow: hidden;
+}
+
+.workspace-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #f4dea4 0%, var(--secondary) 52%, #b88730 100%);
+}
+
+.workspace-progress-card p {
+  margin-top: 0.7rem;
+}
+
+.workspace-message-card {
+  padding: 1.15rem;
+}
+
+.workspace-message-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.workspace-message-card-head strong {
+  color: var(--primary-dark);
+}
+
+.workspace-message-card-head span,
+.workspace-message-card small {
+  color: var(--gray-500);
+}
+
+.workspace-message-card small {
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.workspace-message-card p {
+  margin-top: 0.75rem;
+}
+
+.workspace-table {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.workspace-table-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.1fr 0.8fr 0.7fr 0.7fr;
+  gap: 0.75rem;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: rgba(91, 35, 79, 0.04);
+  color: var(--gray-600);
+}
+
+.workspace-table-row-head {
+  background: rgba(91, 35, 79, 0.08);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  .workspace-topbar-shell,
+  .workspace-overview-grid,
+  .workspace-two-column-grid,
+  .workspace-card-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-topbar-shell {
+    gap: 0.9rem;
+  }
+
+  .workspace-actions {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 860px) {
+  .workspace-shell {
+    width: min(100% - 1.2rem, 1320px);
+  }
+
+  .workspace-main {
+    padding-top: 1.25rem;
+  }
+
+  .workspace-hero-card,
+  .workspace-panel,
+  .workspace-file-card {
+    padding: 1.2rem;
+  }
+
+  .workspace-form-grid-two,
+  .workspace-list-inputs,
+  .workspace-file-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-kpi-grid {
+    grid-template-columns: repeat(4, minmax(11rem, 1fr));
+    gap: 0.9rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.2rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .workspace-kpi-card {
+    min-height: 7.2rem;
+    padding: 1rem;
+    scroll-snap-align: start;
+  }
+
+  .workspace-kpi-card strong {
+    font-size: 1.55rem;
+  }
+
+  .workspace-kpi-card small {
+    font-size: 0.82rem;
+  }
+
+  .workspace-field-span-two {
+    grid-column: auto;
+  }
+
+  .workspace-table-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .workspace-topbar {
+    position: static;
+  }
+
+  .workspace-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.2rem;
+  }
+
+  .workspace-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-user-chip {
+    width: 100%;
+  }
+
+  .workspace-hero-card h1 {
+    max-width: none;
+    font-size: 2.15rem;
+  }
+
+  .workspace-panel h2 {
+    font-size: 1.45rem;
+  }
+
+  .workspace-kpi-grid {
+    gap: 0.8rem;
+  }
+
+  .workspace-kpi-card {
+    min-height: 6.4rem;
+    padding: 0.9rem 0.88rem;
+    border-radius: 1.35rem;
+  }
+
+  .workspace-kpi-card span {
+    font-size: 0.76rem;
+  }
+
+  .workspace-kpi-card strong {
+    margin-top: 0.45rem;
+    font-size: 1.35rem;
+  }
+
+  .workspace-kpi-card small {
+    margin-top: 0.4rem;
+    font-size: 0.74rem;
+    line-height: 1.45;
+  }
+
+  .workspace-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-table-row span {
+    display: block;
+  }
+}
+
+@media (max-width: 420px) {
+  .workspace-kpi-grid {
+    gap: 0.7rem;
+  }
+
+  .workspace-kpi-card {
+    min-height: 6rem;
+    padding: 0.82rem 0.8rem;
+  }
+
+  .workspace-kpi-card span {
+    font-size: 0.72rem;
+  }
+
+  .workspace-kpi-card strong {
+    font-size: 1.22rem;
+  }
+
+  .workspace-kpi-card small {
+    font-size: 0.7rem;
+  }
+}

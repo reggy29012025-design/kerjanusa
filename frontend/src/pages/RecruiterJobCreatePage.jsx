@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Fragment, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RecruiterTopbar from '../components/RecruiterTopbar.jsx';
 import useAuth from '../hooks/useAuth';
 import useJobs from '../hooks/useJobs';
@@ -793,14 +793,6 @@ const RecruiterJobCreatePage = () => {
     };
   }, [currentStep, pendingFieldNavigation]);
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (user.role !== 'recruiter') {
-    return <Navigate to="/" replace />;
-  }
-
   const descriptionLength = formData.description.trim().length;
   const addressDetailLength = addressFormData.detail.trim().length;
   const minimumExpiryDate = new Date().toISOString().split('T')[0];
@@ -1477,7 +1469,7 @@ const RecruiterJobCreatePage = () => {
 
         <section className="recruiter-job-create-stepper" aria-label="Tahapan pembuatan lowongan">
           {FORM_STEP_OPTIONS.map((step, index) => (
-            <React.Fragment key={step.number}>
+            <Fragment key={step.number}>
               <div
                 className={`recruiter-job-create-step${
                   step.number === currentStep ? ' active' : ''
@@ -1492,7 +1484,7 @@ const RecruiterJobCreatePage = () => {
               {index < FORM_STEP_OPTIONS.length - 1 && (
                 <span className="recruiter-job-create-step-divider" aria-hidden="true" />
               )}
-            </React.Fragment>
+            </Fragment>
           ))}
         </section>
 

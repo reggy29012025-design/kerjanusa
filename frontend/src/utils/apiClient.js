@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getLoginRouteForRole } from './routeHelpers.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -23,8 +24,17 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
+      let userRole = null;
+
+      try {
+        userRole = JSON.parse(localStorage.getItem('user') || 'null')?.role || null;
+      } catch {
+        userRole = null;
+      }
+
       localStorage.removeItem('auth_token');
-      window.location.href = '/login';
+      localStorage.removeItem('user');
+      window.location.replace(getLoginRouteForRole(userRole));
     }
     return Promise.reject(error);
   }

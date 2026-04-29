@@ -117,7 +117,12 @@
   font-weight: 600;
   line-height: 1.2;
   cursor: pointer;
+  text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.recruiter-topbar-link-home {
+  display: none;
 }
 
 .recruiter-topbar-link.active,
@@ -277,6 +282,9 @@
 }
 
 .recruiter-create-job-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.68rem 1.02rem;
   border: 1px solid rgba(var(--recruiter-brand-primary-rgb), 0.22);
   background: linear-gradient(
@@ -288,6 +296,7 @@
   color: #ffffff;
   box-shadow: 0 16px 30px rgba(var(--recruiter-brand-primary-rgb), 0.22);
   font-size: 0.82rem;
+  text-decoration: none;
 }
 
 .recruiter-content-surface {
@@ -2664,6 +2673,10 @@
     text-align: left;
     border: 1px solid rgba(183, 133, 45, 0.12);
     background: rgba(247, 237, 228, 0.72);
+  }
+
+  .recruiter-topbar-link-home {
+    display: flex;
   }
 
   .recruiter-topbar-actions {

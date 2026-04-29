@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import LoginForm from '../components/LoginForm.jsx';
-import useAuth from '../hooks/useAuth';
+import { APP_ROUTES } from '../utils/routeHelpers.js';
 import '../styles/auth.css';
 
 const loginSlides = [
@@ -19,19 +19,55 @@ const loginSlides = [
   },
 ];
 
+const LOGIN_ENTRY_COPY = {
+  default: {
+    heading: 'Masuk ke akun Anda',
+    description:
+      'Gunakan email dan password untuk membuka dashboard recruiter atau alur kandidat Anda.',
+    registerLabel: 'Belum punya akun?',
+    registerTo: '/register?role=recruiter',
+    registerCta: 'Daftar di sini',
+    emailPlaceholder: 'Email recruiter / company',
+  },
+  recruiter: {
+    description:
+      'Masuk untuk membuka dashboard, pasang lowongan, dan kelola kandidat.',
+    registerLabel: 'Belum punya akun?',
+    registerTo: '/register?role=recruiter',
+    registerCta: 'Daftar di sini',
+    emailPlaceholder: 'Email recruiter / company',
+  },
+  candidate: {
+    heading: 'Login Pelamar',
+    description:
+      'Masuk untuk melihat status lamaran, lowongan aktif, dan aktivitas kandidat Anda.',
+    registerLabel: 'Belum punya akun pelamar?',
+    registerTo: '/register?role=candidate',
+    registerCta: 'Daftar di sini',
+    emailPlaceholder: 'Email pelamar',
+  },
+  internal: {
+    heading: 'Login KerjaNusa',
+    description:
+      'Masuk untuk membuka dashboard admin internal dan memantau pelamar, recruiter, serta lowongan.',
+    helper: 'Akun internal dikelola langsung oleh tim KerjaNusa.',
+    emailPlaceholder: 'Email tim KerjaNusa',
+  },
+};
+
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const [searchParams] = useSearchParams();
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  const handleLoginSuccess = (authData) => {
-    if (authData?.user?.role === 'recruiter') {
-      navigate('/recruiter');
-      return;
-    }
-
-    navigate('/');
-  };
+  const requestedRole = searchParams.get('role');
+  const loginEntryKey =
+    requestedRole === 'candidate' || requestedRole === 'internal' || requestedRole === 'recruiter'
+      ? requestedRole
+      : 'default';
+  const loginCopy = LOGIN_ENTRY_COPY[loginEntryKey];
+  const forgotPasswordTo =
+    loginEntryKey === 'default'
+      ? APP_ROUTES.forgotPassword
+      : `${APP_ROUTES.forgotPassword}?role=${loginEntryKey}`;
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -41,20 +77,12 @@ const LoginPage = () => {
     return () => window.clearInterval(intervalId);
   }, []);
 
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-
-    navigate(user.role === 'recruiter' ? '/recruiter' : '/', { replace: true });
-  }, [navigate, user]);
-
   return (
     <div className="auth-page auth-page-login">
       <div className="auth-login-layout">
         <section className="auth-showcase" aria-hidden="true" data-reveal>
           <div className="auth-showcase-copy">
-            <div className="auth-showcase-kicker">Video Interview Review</div>
+            <div className="auth-showcase-kicker">Keunggulan</div>
             <p>
               HR dapat menilai <span>rekaman video pelamar</span>, memberi catatan, dan
               memutuskan shortlist lebih cepat dalam satu tampilan.
@@ -114,23 +142,34 @@ const LoginPage = () => {
         <section className="auth-panel" data-reveal data-reveal-delay="120ms">
           <div className="auth-panel-inner">
             <div className="auth-panel-brand">
-              <img
-                className="auth-panel-brand-image"
-                src="/kerjanusa-logo.png"
-                alt="KerjaNusa Recruitment Platform"
-              />
+                <img
+                  className="auth-panel-brand-image"
+                  src="/kerjanusa-logo-cutout.png"
+                  alt="KerjaNusa Recruitment Platform"
+                />
             </div>
 
             <div className="auth-panel-copy">
-              <h1>Masuk ke akun Anda</h1>
-              <p>Gunakan email dan password untuk membuka dashboard recruiter.</p>
+              {loginCopy.heading ? <h1>{loginCopy.heading}</h1> : null}
+              <p>{loginCopy.description}</p>
+              {loginCopy.helper && <small className="auth-panel-helper">{loginCopy.helper}</small>}
             </div>
 
             <div className="auth-panel-form">
-              <LoginForm onSuccess={handleLoginSuccess} />
-              <p className="auth-link">
-                Belum punya akun? <Link to="/register">Daftar di sini</Link>
-              </p>
+              <LoginForm
+                emailPlaceholder={loginCopy.emailPlaceholder}
+                forgotPasswordTo={forgotPasswordTo}
+              />
+              {loginCopy.registerTo ? (
+                <p className="auth-link">
+                  {loginCopy.registerLabel}{' '}
+                  <Link to={loginCopy.registerTo}>{loginCopy.registerCta}</Link>
+                </p>
+              ) : (
+                <p className="auth-link auth-link-muted">
+                  Jika Anda membutuhkan akses internal, hubungi administrator KerjaNusa.
+                </p>
+              )}
             </div>
           </div>
         </section>

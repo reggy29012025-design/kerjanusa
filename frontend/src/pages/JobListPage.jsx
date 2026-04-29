@@ -7,6 +7,7 @@ import useApplications from '../hooks/useApplications.js';
 import useAuth from '../hooks/useAuth.js';
 import useJobs from '../hooks/useJobs';
 import JobService from '../services/jobService.js';
+import { getDefaultRouteForRole } from '../utils/routeHelpers.js';
 import {
   formatExperienceLevel,
   formatVideoScreeningRequirement,
@@ -268,12 +269,12 @@ const JobListPage = () => {
   const handleApply = React.useCallback(
     (job) => {
       if (!user) {
-        navigate('/login');
+        navigate('/login?role=candidate');
         return;
       }
 
       if (user.role !== 'candidate') {
-        navigate('/login');
+        navigate(getDefaultRouteForRole(user.role));
         return;
       }
 

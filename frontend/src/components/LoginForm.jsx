@@ -1,8 +1,13 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import '../styles/authForm.css';
 
-const LoginForm = ({ onSuccess }) => {
+const LoginForm = ({
+  onSuccess,
+  emailPlaceholder = 'Email recruiter / company',
+  forgotPasswordTo = '/forgot-password',
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberDevice, setRememberDevice] = useState(true);
@@ -28,7 +33,7 @@ const LoginForm = ({ onSuccess }) => {
           id="email"
           type="email"
           autoComplete="username"
-          placeholder="Email recruiter"
+          placeholder={emailPlaceholder}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -61,9 +66,18 @@ const LoginForm = ({ onSuccess }) => {
           />
           <span>Ingat perangkat ini</span>
         </label>
-        <button type="button" className="auth-form-forgot" disabled={isLoading}>
+        <Link
+          to={forgotPasswordTo}
+          className={`auth-form-forgot${isLoading ? ' is-disabled' : ''}`}
+          onClick={(event) => {
+            if (isLoading) {
+              event.preventDefault();
+            }
+          }}
+          aria-disabled={isLoading}
+        >
           Lupa kata sandi?
-        </button>
+        </Link>
       </div>
 
       <button type="submit" className="btn btn-primary" disabled={isLoading}>

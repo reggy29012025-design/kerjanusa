@@ -3,7 +3,7 @@ const BrandLogo = () => {
     <div className="auth-brand-logo">
       <img
         className="auth-brand-logo-image"
-        src="/kerjanusa-logo.png"
+        src="/kerjanusa-logo-cutout.png"
         alt="KerjaNusa Recruitment Platform"
       />
     </div>

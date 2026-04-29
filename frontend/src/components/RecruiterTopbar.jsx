@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { APP_ROUTES } from '../utils/routeHelpers.js';
 
 const RecruiterTopbar = ({
   sections,
@@ -15,7 +16,7 @@ const RecruiterTopbar = ({
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [location.hash, location.pathname]);
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -41,6 +42,11 @@ const RecruiterTopbar = ({
     onSectionSelect?.(section);
   };
 
+  const handleHomeClick = () => {
+    closeMobileMenu();
+    scrollToTop();
+  };
+
   const handleLogoutClick = () => {
     closeMobileMenu();
     onLogout?.();
@@ -53,12 +59,12 @@ const RecruiterTopbar = ({
       >
         <div className="recruiter-topbar-shell">
           <Link
-            to="/recruiter"
+            to={APP_ROUTES.recruiterDashboard}
             className="recruiter-topbar-brand"
             aria-label="Dashboard recruiter"
             onClick={handleBrandClick}
           >
-            <img src="/kerjanusa-logo.png" alt="KerjaNusa Recruitment Platform" />
+            <img src="/kerjanusa-logo-cutout.png" alt="KerjaNusa Recruitment Platform" />
           </Link>
 
           <button
@@ -79,6 +85,13 @@ const RecruiterTopbar = ({
             className={`recruiter-topbar-panel${isMobileMenuOpen ? ' is-open' : ''}`}
           >
             <nav className="recruiter-topbar-nav" aria-label="Navigasi recruiter">
+              <Link
+                to={APP_ROUTES.landing}
+                className="recruiter-topbar-link recruiter-topbar-link-home"
+                onClick={handleHomeClick}
+              >
+                Website Awal
+              </Link>
               {sections.map((section) => (
                 <button
                   key={section.value}

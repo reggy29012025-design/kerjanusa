@@ -1,55 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LandingRegisterForm from '../components/LandingRegisterForm.jsx';
+import useAuth from '../hooks/useAuth.js';
 import '../styles/home.css';
 
 const brandList = [
   {
-    name: 'Jiwa Group',
-    src: 'https://jiwagroup.com/assets/img/Jiwa-Group-Logo_JJ-PURPLE.png',
+    name: 'Vismaya',
+    src: '/partner-logos/vismaya.png',
   },
   {
-    name: 'MNC Play',
-    src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/MNC%20Play%20by%20IOH%20%282023%29.png',
+    name: 'Dkriuk Fried Chicken',
+    src: '/partner-logos/dkriuk-fried-chicken.png',
   },
   {
-    name: 'ERHA Ultimate',
-    src: 'https://d910052chok68.cloudfront.net/footers/erha-ultimate.png?format=auto',
+    name: 'GMP',
+    src: '/partner-logos/gmp.png',
   },
   {
-    name: 'FOOM',
-    src: 'https://foom.id/cdn/shop/files/logo_foom.jpg?v=1769418409&width=260',
+    name: 'Kawan Lama Group',
+    src: '/partner-logos/kawan-lama-group.png',
   },
   {
-    name: 'Home Credit',
-    src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Home%20Credit%20logo.svg',
+    name: 'CP Food Division',
+    src: '/partner-logos/cp-food-division.png',
   },
   {
-    name: 'Indodana',
-    src: 'https://prod-tmf.imgix.net/common-assets/logo-color.png?auto=compress&auto=format',
+    name: 'Mixue',
+    src: '/partner-logos/mixue.png',
   },
   {
-    name: 'Indomaret',
-    src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo%20Indomaret.png',
-  },
-  {
-    name: 'Bank Jago',
-    src: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo-jago.svg',
-  },
-];
-
-const heroSlides = [
-  {
-    src: '/hero-slides/review-1.jpeg',
-    alt: 'Dashboard kandidat dengan video interview, score total 65 dari 100, dan rekomendasi tolak kandidat.',
-  },
-  {
-    src: '/hero-slides/review-2.jpeg',
-    alt: 'Dashboard kandidat dengan video interview, penilaian soft skill, catatan HR, dan score total 74 dari 100.',
-  },
-  {
-    src: '/hero-slides/review-3.jpeg',
-    alt: 'Dashboard kandidat dengan video interview, daftar pertanyaan dan jawaban, serta score total 82 dari 100.',
+    name: 'J.Chicken',
+    src: '/partner-logos/j-chicken.png',
   },
 ];
 
@@ -137,17 +119,58 @@ const aboutPillars = [
   },
 ];
 
+const entryPortalCards = [
+  {
+    title: 'Login Rekruter',
+    description: 'Masuk sebagai recruiter atau company untuk membuka dashboard dan mengelola lowongan.',
+    to: '/login?role=recruiter',
+    action: 'Masuk sebagai Rekruter',
+  },
+  {
+    title: 'Login Pelamar',
+    description: 'Masuk sebagai kandidat untuk memantau proses lamaran dan aktivitas pencarian kerja.',
+    to: '/login?role=candidate',
+    action: 'Masuk sebagai Pelamar',
+  },
+  {
+    title: 'Login Admin KerjaNusa',
+    description: 'Akses admin internal sementara tetap memakai halaman login utama yang sama.',
+    to: '/login?role=internal',
+    action: 'Masuk sebagai Admin',
+  },
+];
+
 const HomePage = () => {
+  const { user } = useAuth();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setCurrentHeroSlide((currentIndex) => (currentIndex + 1) % heroSlides.length);
-    }, 3000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
+  const userRole = user?.role;
+  const heroQuickLinks = user
+    ? userRole === 'recruiter'
+      ? [
+          { label: 'Pasang Loker Sekarang', to: '/recruiter/jobs/create', primary: true },
+          { label: 'Dashboard Company', to: '/recruiter' },
+          { label: 'Cari Pekerjaan', to: '/jobs' },
+          { label: 'Tentang Kami', to: '/platform' },
+        ]
+      : userRole === 'candidate'
+        ? [
+            { label: 'Info Data Diri', to: '/candidate', primary: true },
+            { label: 'Cari Pekerjaan', to: '/jobs' },
+            { label: 'Chat', to: '/candidate#chat' },
+            { label: 'Tentang Kami', to: '/platform' },
+          ]
+        : [
+            { label: 'Dashboard Admin', to: '/admin', primary: true },
+            { label: 'Monitoring Pelamar', to: '/admin#pelamar' },
+            { label: 'Moderasi Lowongan', to: '/admin#moderasi' },
+            { label: 'Tentang Kami', to: '/platform' },
+          ]
+    : [
+        { label: 'Login', to: '/login', primary: true },
+        { label: 'Daftar Sekarang', to: '/register' },
+        { label: 'Dashboard Company', to: '/login?role=recruiter' },
+        { label: 'Tentang Kami', to: '/platform' },
+      ];
 
   const toggleFaq = (index) => {
     setOpenFaqIndex((currentIndex) => (currentIndex === index ? null : index));
@@ -158,35 +181,39 @@ const HomePage = () => {
       <section className="home-hero">
         <div className="home-shell home-hero-grid">
           <div className="hero-copy" data-reveal data-reveal-delay="40ms">
-            <span className="hero-kicker">KerjaNusa</span>
-            <h1>
-              Pasang lowongan kerja gratis <span className="hero-highlight">TANPA BATAS!</span>
-            </h1>
+            <span className="hero-kicker">Beranda Ringkas</span>
+            <h1>Dashboard Awal</h1>
             <p className="hero-description">
-              Tanpa batas dan optimalkan proses rekrutmen Anda dengan solusi yang dirancang untuk
-              efisiensi dan kemudahan penggunaan.
+              Saat pertama masuk website, user langsung melihat fitur inti tanpa perlu mencari
+              menu yang tidak relevan di tahap awal.
             </p>
-            <p className="hero-description hero-description-secondary">
-              Kelola seluruh proses hiring mulai dari publikasi lowongan hingga penyaringan
-              kandidat dalam satu dashboard yang cepat, terstruktur, dan ramah bagi tim rekrutmen.
-            </p>
-
-            <div className="hero-benefits">
-              <div className="hero-benefit-item">Publikasi lowongan aktif tanpa batas</div>
-              <div className="hero-benefit-item">Proses skrining CV yang lebih cepat dan terarah</div>
-              <div className="hero-benefit-item">
-                Akses fitur Talent Search untuk menemukan kandidat potensial
-              </div>
-              <div className="hero-benefit-item">Jangkau lebih dari 10 juta kandidat berkualitas</div>
+            <div className="hero-feature-brief">
+              <span className="hero-feature-heading">Fitur</span>
+              <p className="hero-feature-summary">
+                Masuk website awal langsung muncul hanya fitur <strong>Login</strong>,{' '}
+                <strong>Daftar Sekarang</strong>, <strong>Dashboard Company</strong>, dan{' '}
+                <strong>Tentang Kami</strong>.
+              </p>
+              <ul className="hero-feature-list">
+                <li>
+                  <strong>Login</strong> untuk Rekruter, Pelamar, dan Admin KerjaNusa.
+                </li>
+                <li>
+                  <strong>Daftar Sekarang</strong> untuk Rekruter dan Pelamar.
+                </li>
+              </ul>
             </div>
 
             <div className="hero-actions">
-              <a href="#daftar" className="btn btn-primary btn-hero">
-                Pasang Loker Sekarang
-              </a>
-              <Link to="/jobs" className="btn btn-ghost btn-hero-secondary">
-                Lihat Lowongan
-              </Link>
+              {heroQuickLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  className={`btn btn-hero${link.primary ? ' btn-primary' : ' btn-ghost btn-hero-secondary'}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -197,49 +224,74 @@ const HomePage = () => {
                 className="hero-greeting-card"
                 aria-label="Buka halaman Tentang Kami"
               >
-                <img src="/kerjanusa-logo.png" alt="" className="hero-greeting-logo" />
+                <img src="/kerjanusa-badge-final-v4.png" alt="" className="hero-greeting-logo" />
               </Link>
 
               <div className="hero-carousel">
-                <div className="hero-carousel-shell">
-                  <div
-                    className="hero-carousel-track"
-                    style={{ transform: `translateX(-${currentHeroSlide * 100}%)` }}
-                  >
-                    {heroSlides.map((slide) => (
-                      <figure key={slide.src} className="hero-slide">
-                        <img src={slide.src} alt={slide.alt} className="hero-slide-image" />
-                      </figure>
-                    ))}
-                  </div>
-
-                  <div className="hero-carousel-overlay">
-                    <span className="hero-carousel-pill">Review Kandidat</span>
-                    <div className="hero-carousel-caption">
-                      <strong>Video screening aktif</strong>
-                      <span>Shortlist, review, dan evaluasi dalam satu alur</span>
+                <div className="hero-carousel-shell hero-carousel-shell-concept">
+                  <div className="hero-concept-board">
+                    <span className="hero-concept-kicker">Akses Cepat</span>
+                    <div className="hero-concept-grid">
+                      <article className="hero-concept-card">
+                        <strong>Login</strong>
+                        <span>Rekruter, Pelamar, Admin KerjaNusa</span>
+                      </article>
+                      <article className="hero-concept-card">
+                        <strong>Daftar Sekarang</strong>
+                        <span>Rekruter dan Pelamar</span>
+                      </article>
+                      <article className="hero-concept-card">
+                        <strong>Dashboard Company</strong>
+                        <span>Pintu masuk recruiter eksternal</span>
+                      </article>
+                      <article className="hero-concept-card">
+                        <strong>Tentang Kami</strong>
+                        <span>Profil dan informasi platform</span>
+                      </article>
                     </div>
                   </div>
-                </div>
-
-                <div className="hero-carousel-controls" aria-label="Hero slide controls">
-                  {heroSlides.map((slide, index) => (
-                    <button
-                      key={slide.src}
-                      type="button"
-                      className={`hero-carousel-dot${currentHeroSlide === index ? ' active' : ''}`}
-                      aria-label={`Tampilkan slide ${index + 1}`}
-                      aria-pressed={currentHeroSlide === index}
-                      onClick={() => setCurrentHeroSlide(index)}
-                    />
-                  ))}
                 </div>
               </div>
 
               <div className="hero-visual-note">
-                <strong>Tingkatkan produktivitas tim rekrutmen Anda</strong>
-                <span>dengan platform yang andal dan profesional.</span>
+                <strong>Alur masuk dibuat lebih jelas</strong>
+                <span>
+                  Recruiter, pelamar, dan admin KerjaNusa sekarang punya jalur akses yang lebih
+                  mudah dipahami dari beranda awal.
+                </span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-entry-hub-section" aria-label="Portal masuk utama">
+        <div className="home-shell">
+          <div className="entry-hub-flow" data-reveal>
+            <div className="entry-hub-root">
+              <span className="entry-hub-root-kicker">Dashboard Awal</span>
+              <strong>Pilih jalur login sesuai peran Anda</strong>
+            </div>
+
+            <div className="entry-hub-rail" aria-hidden="true">
+              <span className="entry-hub-stem" />
+              <span className="entry-hub-branch" />
+            </div>
+
+            <div className="entry-hub-grid">
+              {entryPortalCards.map((portal, index) => (
+                <Link
+                  key={portal.title}
+                  to={portal.to}
+                  className="entry-hub-card"
+                  data-reveal
+                  data-reveal-delay={`${index * 80}ms`}
+                >
+                  <span className="entry-hub-card-label">{portal.title}</span>
+                  <p>{portal.description}</p>
+                  <strong>{portal.action}</strong>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

@@ -157,24 +157,6 @@ const PlatformPage = () => {
               Kami berkomitmen meningkatkan kualitas rekrutmen di Indonesia dengan menjembatani
               pencari kerja dan perusahaan melalui teknologi digital yang efisien dan inklusif.
             </p>
-            <div className="platform-hero-audience" aria-label="Fokus pengguna platform">
-              <Link to="/register?role=recruiter">Untuk perusahaan</Link>
-              <Link to="/register?role=candidate">Untuk kandidat</Link>
-            </div>
-            <p className="platform-hero-note">
-              Halaman ini menjelaskan KerjaNusa dari sisi brand dan ekosistem. Alur recruiter
-              dipakai perusahaan untuk memasang lowongan dan menyaring kandidat, sedangkan pelamar
-              tetap dapat melihat lowongan publik dari sisi mereka.
-            </p>
-
-            <div className="platform-hero-actions">
-              <Link to="/jobs" className="btn btn-primary">
-                Lihat Lowongan
-              </Link>
-              <a href="mailto:kontak@kerjanusa.com" className="btn btn-outline">
-                Hubungi Kami
-              </a>
-            </div>
           </div>
 
           <div className="platform-hero-panel">
@@ -533,10 +515,10 @@ const PlatformPage = () => {
             </div>
 
             <div className="platform-contact-list">
-              <a href="https://www.kerjanusa.com" target="_blank" rel="noreferrer">
-                www.kerjanusa.com
+              <a href="https://www.kerjanusacompany.com" target="_blank" rel="noreferrer">
+                www.Kerjanusacompany.com
               </a>
-              <a href="mailto:kontak@kerjanusa.com">kontak@kerjanusa.com</a>
+              <a href="mailto:Kerjanusacompany@gmail.com">Kerjanusacompany@gmail.com</a>
               <span>Bogor, Jawa Barat</span>
             </div>
           </div>

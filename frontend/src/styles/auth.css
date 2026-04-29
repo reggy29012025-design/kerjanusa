@@ -68,6 +68,14 @@
   line-height: 1.6;
 }
 
+.auth-panel-helper {
+  display: block;
+  margin-top: 0.55rem;
+  color: var(--gray-500);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
 .auth-link {
   text-align: center;
   color: var(--gray-600);
@@ -83,6 +91,10 @@
 
 .auth-link a:hover {
   text-decoration: underline;
+}
+
+.auth-link-muted {
+  color: var(--gray-500);
 }
 
 .auth-page-login {
